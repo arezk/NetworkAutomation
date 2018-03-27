@@ -1,65 +1,64 @@
-
+############# Application #2 - Part #1 #############
 
 import paramiko
+import threading
+import os.path
+import subprocess
+import time
 import sys
 import re
-import os.path
-import threading
-import time
-import subprocess
 
-#Validate the IP Address
-def ip_add_valid():
-    valid=False
-    global ip_add_list
-    
+
+# Checking IP address file and content validity
+def ip_is_valid():
+    # Creating a Flag with Boolean value to validate against a condition.
+    check = False
+    global ip_list
+
     while True:
-        # User to input the IP Address file name
-        print "\n # # # # # # # # # # # # # # # #\n"
-        ip_file= raw_input("Enter The IP File Name: ")
-        print "\n # # # # # # # # # # # # # # # #\n"
-        
-        # Validating the file with Try and Except
-        
+        # Prompting user for input
+        print "\n# # # # # # # # # # # # # # # # # # # # # # # # # # # #\n"
+        ip_file = raw_input("# Enter IP file name and extension: ")
+        print "\n# # # # # # # # # # # # # # # # # # # # # # # # # # # #"
+
+        # Changing exception message
         try:
-            # Open the IP Address File that has been entered
-            entered_ip_file = open(ip_file, 'r')
-            
-            #start from the beginning of the file to read
-            entered_ip_file.seek(0)
-            
-            # assign the global variable and read the file line by line
-            
-            ip_add_list = entered_ip_file.readlines()
-            
-            # Then closing the file
-            
-            entered_ip_file.close()
+            # Open user selected file for reading (IP addresses file)
+            selected_ip_file = open(ip_file, 'r')
+
+            # Starting from the beginning of the file
+            selected_ip_file.seek(0)
+
+            # Reading each line (IP address) in the file
+            ip_list = selected_ip_file.readlines()
+
+            # Closing the file
+            selected_ip_file.close()
+
         except IOError:
-            print "\n* File %s does not exist! Please check and try again!\n" % ip_add_file
-        
-        # Checking the validity of each IP Address FORMAT... This snippest can be used
-        
-        for ip in ip_add_list:
-            octects=ip.split('.') # splitting the IP address into octets.
-           # print octects
-            
-            #Criteria for IP Address validation using each octect
-            if (len(octects) == 4) and (1 <= int(octects[0]) <= 223) and (int(octects[0]) != 127) and (int(octects[0]) != 169 or int(octects[1]) != 254) and (0 <= int(octects[1]) <= 255 and 0 <= int(octects[2]) <= 255 and 0 <= int(octects[3]) <= 255):
-                print '\n* The IP Address(s) is/are Valid!\n'
-                valid = True
+            print "\n* File %s does not exist! Please check and try again!\n" % ip_file
+        print ip_list
+        # Checking octets
+        for ip in ip_list:
+            a = ip.split('.')
+
+            if (len(a) == 4) and (1 <= int(a[0]) <= 223) and (int(a[0]) != 127) and (
+                            int(a[0]) != 169 or int(a[1]) != 254) and (
+                                    0 <= int(a[1]) <= 255 and 0 <= int(a[2]) <= 255 and 0 <= int(a[3]) <= 255):
+                check = True
                 break
+
             else:
                 print '\n* There was an INVALID IP address! Please check and try again!\n'
-                valid = False
+                check = False
                 continue
-            
-        if valid == True:
+
+        # Evaluating the 'check' flag
+        if check == False:
+            continue
+
+        elif check == True:
             break
-        elif valid == False:
-            break
 
-ip_add_valid()
 
-      ################### Testing the Reachability of the IP addresses ################
-
+ip_is_valid()
