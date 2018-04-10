@@ -16,12 +16,13 @@ input_file.close()
 print '--- Device info nicely presented ------------------------------------------------------------'
 print 'Name                IP Address       OS Image      Username       Password'
 print '-----------         ---------------  -----------   ----------     ----------'
+# Using PyFormat Tools for printing. Revieing pyformat.info
 print '{0:19} {1:17} {2:12} {3:14} {4:15}'.format(Router_name,IP_Address,IOS_image,Username,Password)
 print '---------------------------------------------------------------------------------------------'
 
 
 
-#writing into a file with comma seperated value (creating CSV)
+#writing into a file with comma seperated value (creating CSV) -- More effecient way to do it of course.
 device_info_comma=Router_name
 device_info_comma=device_info_comma + ',' + IP_Address
 device_info_comma=device_info_comma + ',' + IOS_image
