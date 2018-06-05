@@ -3,6 +3,7 @@
 
 import paramiko
 
+
 ip_address = '10.30.30.1'
 username = 'cisco'
 password = 'cisco'
@@ -29,3 +30,14 @@ print '--- Success! connecting to: ', ip_address
 print '---               Username: ', username
 print '---               Password: ', password
 print '------------------------------------------------------\n'
+
+print '------------------------------------------------------\n'
+print '-----Changing the hostname of router r1 to R1  -------\n'
+
+stdin, stdout, stderr = ssh_client.exec_command('configure t')
+stdin, stdout, stderr = ssh_client.exec_command('hostname R1')
+stdin, stdout, stderr = ssh_client.exec_command('exit')
+
+ssh_client.close()
+
+

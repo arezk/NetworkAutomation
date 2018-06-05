@@ -1,0 +1,20 @@
+from pprint import pprint
+
+deviceInfo = []
+#opening the List file and fille in the list
+fileOpen = open('list.csv','r')
+fileOpen_line = fileOpen.readline().strip()
+
+#printing the list of information
+print 'read line: ', fileOpen_line
+
+#stripping the ',' comma
+
+deviceInfo=fileOpen_line.split(',')
+
+pprint(deviceInfo)
+
+fileOpen.close()
+
+
+
