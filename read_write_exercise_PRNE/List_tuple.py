@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from pprint import pprint
 from collections import namedtuple
 
@@ -15,5 +17,4 @@ for line in newfile:
 pprint(devices)
 
 newfile.close()
-
 
