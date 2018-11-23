@@ -32,6 +32,9 @@ print '---               Password: ', password
 print '------------------------------------------------------\n'
 
 print '------------------------------------------------------\n'
+
+# Sample of a Command to push to the router. We could check if there is a series of commands to look.
+
 print '-----Changing the hostname of router r1 to R1  -------\n'
 
 stdin, stdout, stderr = ssh_client.exec_command('configure t')
