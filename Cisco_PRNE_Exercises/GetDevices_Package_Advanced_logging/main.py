@@ -1,8 +1,11 @@
+# Main Program
+
 import logging
 import logging.handlers
 
 from util import read_devices_info
 from devclass import NetworkDeviceIOS
+
 
 #====================================================================
 devices_filename = 'csv-devices'
@@ -16,12 +19,15 @@ handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s -
 
 logger.addHandler(handler)
 
-#--- Read in devices from file ---------
-devices_list_in = read_devices_info(devices_filename)  # read CSV info for all devices
+
+#--- Read in devices from file and put it in a Device List ---------
+devices_list_in = read_devices_info(devices_filename)  # read CSV info for all devices from the file "devices_filename" mentioned above
 
 logger.info('read %s devices from %s', len(devices_list_in), devices_filename)
 
+
 # Iterate through all devices from the file, creating device objects for each
+
 devices_list = []
 for device_in in devices_list_in:
 
@@ -33,6 +39,9 @@ for device_in in devices_list_in:
     logger.info('created device: %s IP: %s', device.name, device.ip_address)
 
     devices_list.append(device)
+
+
+
 
 # Iterate through all devices, connecting and getting interface and routing info
 for device in devices_list:
